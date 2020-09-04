@@ -19,23 +19,16 @@ class TestServiceImpl: TestService {
         return testRepository.selectAll()
     }
 
-    //override fun insert(insertId: Int, insertName: String): List<TestEntity> {
-    override fun insert(insertId: Int) {
-        logger.info(insertId.toString())
-        //logger.info("insertName = " + insertName)
-        //testRepository.insert(insertId, insertName)
-        testRepository.insert(insertId)
+    override fun insert(insertId: Int, insertName: String) {
+        testRepository.insert(insertId, insertName)
     }
 
-    override fun edit(id: Int, testEntity: TestEntity): TestEntity {
-        //testEntity.id = id
-        testRepository.edit(testEntity)
-        return testEntity
+    override fun update(updateId: Int, updateName: String) {
+        testRepository.update(updateId, updateName)
     }
 
-    override fun delete(@Param("id") id: Int): List<TestEntity> {
-        testRepository.delete(id)
-        return testRepository.selectAll()
+    override fun delete(deleteId: Int) {
+        testRepository.delete(deleteId)
     }
 
 }

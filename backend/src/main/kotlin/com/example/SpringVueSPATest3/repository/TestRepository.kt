@@ -11,14 +11,12 @@ interface  TestRepository {
     @Select("SELECT * FROM testdb1;")
     fun selectAll(): List<TestEntity>
 
-    //@Insert("INSERT INTO testdb1(insertId, insertName) values(#{insertId}, #{insertName})")
-    @Insert("INSERT INTO testdb1(id, name) values('#{insertId}', 'hogehoge')")
-    //fun insert(@Param("insertId") insertId: Int, @Param("insertName") insertName: String): List<TestEntity>
-    fun insert(@Param("insertId") insertId: Int)
+    @Insert("INSERT INTO testdb1(id, name) values(#{insertId}, #{insertName})")
+    fun insert(insertId: Int, insertName: String)
 
-    @Update("UPDATE testdb1 SET id=#{id}, name=#{name} WHERE id=#{id}")
-    fun edit(testEntity: TestEntity): TestEntity
+    @Update("UPDATE testdb1 SET id=#{updateId}, name=#{updateName} WHERE id=#{updateId}")
+    fun update(updateId: Int, updateName: String)
 
-    @Delete("DELETE FROM testdb1 WHERE id=#{id}")
-    fun delete(@Param("id") id: Int): List<TestEntity>
+    @Delete("DELETE FROM testdb1 WHERE id=#{deleteId}")
+    fun delete(deleteId: Int)
 }

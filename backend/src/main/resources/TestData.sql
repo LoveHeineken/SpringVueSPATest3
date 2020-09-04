@@ -8,3 +8,4 @@ CREATE TABLE SpringVueSpaTest3 (
 
 INSERT INTO user(id, name) VALUES(1, 'test1');
 INSERT INTO user(id, name) VALUES(2, 'test2');
+INSERT INTO user(id, name) VALUES(3, 'test3');

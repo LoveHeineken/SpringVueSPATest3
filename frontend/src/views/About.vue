@@ -12,19 +12,23 @@
     </div>
     <div class="insert">
       <h1>Insert into tastdb1 VALUES (id, name);</h1>
-      <input v-model="insertId" number><input v-model="insertName" string>
+      <input id="insertId" v-model="insertId" number><input id="insertName" v-model="insertName" string>
       <p>insertId is: {{ insertId }}. insertName is: {{ insertName }}</p>
       <button @click="callInsert">insert data</button>
       <h2>{{ insertResult }}</h2>
     </div>
     <div class="update">
       <h1>UPDATE tastdb1 SET name = '' WHERE id = ;</h1>
-      <button @click="callUpdate">Call "Select All"</button>
+      <input id="updateId" v-model="updateId" number><input id="updateName" v-model="updateName" string>
+      <p>insertId is: {{ updateId }}. insertName is: {{ updateName }}</p>
+      <button @click="callUpdate">update data</button>
       <h2>{{ updateResult }}</h2>
     </div>
     <div class="delete">
       <h1>DELETE FROM tastdb1 WHERE id = ;</h1>
-      <button @click="callDelete">Call "Select All"</button>
+      <input id="deleteId" v-model="deleteId" number>
+      <p>deleteId is: {{ deleteId }}</p>
+      <button @click="callDelete">delete data</button>
       <h2>{{ deleteResult }}</h2>
     </div>
   </main>
@@ -42,7 +46,10 @@ export default {
       updateResult: "",
       deleteResult: "",
       insertId: 0,
-      insertName: ""
+      insertName: "",
+      updateId: 0,
+      updateName: "",
+      deleteId: 0
     };
   },
   methods: {
@@ -67,18 +74,11 @@ export default {
           });
      },
     callInsert() {
-        const submitParams = new FormData();
-        //insertId = this.insertId;
-        //this.insertName = insertName;
-        //submitParams.append('insertId',100);
-        //submitParams.append('insertName',this.insertName);
-        //console.log(insertId)
-        console.log(submitParams)
+        let insertId = document.getElementById("insertId").value;
+        let insertName = document.getElementById("insertName").value;
+        let url = "http://localhost:8888/insert/" + insertId + "/" + insertName
         axios
-        //.post("http://localhost:8888/insert/", submitParams)
-        .post("http://localhost:8888/insert/100")
-          //.post("http://localhost:8888/insert?id=#{insertId}&name=#{insertName}")
-          //.post("http://localhost:8888/insert", submitParams)
+        .post(url)
           .then(resp => {
             this.insertResult = resp.data;
           })
@@ -87,8 +87,11 @@ export default {
           });
      },
     callUpdate() {
+        let updateId = document.getElementById("updateId").value;
+        let updateName = document.getElementById("updateName").value;
+        let url = "http://localhost:8888/update/" + updateId + "/" + updateName
         axios
-          .put("http://localhost:8888/select_all")
+          .put(url)
           .then(resp => {
             this.updateResult = resp.data;
           })
@@ -97,8 +100,10 @@ export default {
           });
      },
     callDelete() {
+        let deleteId = document.getElementById("deleteId").value;
+        let url = "http://localhost:8888/delete/" + deleteId
         axios
-          .delete("http://localhost:8888/select_all")
+          .delete(url)
           .then(resp => {
             this.deleteResult = resp.data;
           })

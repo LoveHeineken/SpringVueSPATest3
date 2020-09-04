@@ -37,26 +37,21 @@ class TestController {
         return ResponseEntity.ok().body(testService.selectAll())
     }
 
-    //@PostMapping("/insert")
-    @PostMapping("/insert/{insertId}")
-    //fun insert(@PathVariable("insertId") insertId: Int, @PathVariable("insertName") insertName: String): List<TestEntity> {
-    fun insert(@PathVariable("insertId") insertId: Int) {
-        logger.info("insertId = " + insertId)
-        //logger.info("insertName = " + insertName)
-        //return testService.insert(insertId, insertName)
-        return testService.insert(insertId)
+    @PostMapping("/insert/{insertId}/{insertName}")
+    fun insert(@PathVariable insertId: Int, @PathVariable insertName: String) {
+        return testService.insert(insertId, insertName)
     }
 
     // 1件編集
-    @PutMapping("/edit")
-    fun edit(@PathVariable("id") id: Int, @RequestBody testEntity: TestEntity): TestEntity {
-        return testService.edit(id, testEntity)
+    @PutMapping("/update/{updateId}/{updateName}")
+    fun update(@PathVariable updateId: Int, @PathVariable updateName: String) {
+        return testService.update(updateId, updateName)
     }
 
     // 1件削除
-    @DeleteMapping("/delete")
-    fun delete(@PathVariable("id") id: Int): List<TestEntity> {
-        return testService.delete(id)
+    @DeleteMapping("/delete/{deleteId}")
+    fun delete(@PathVariable deleteId: Int) {
+        return testService.delete(deleteId)
     }
 
     @Bean

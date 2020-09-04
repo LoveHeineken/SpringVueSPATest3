@@ -6,10 +6,9 @@ interface TestService {
 
     fun selectAll(): List<TestEntity>
 
-    //fun insert(insertId: Int, insertName: String): List<TestEntity>
-    fun insert(insertId: Int)
+    fun insert(insertId: Int, insertName: String)
 
-    fun edit(id: Int, testEntity: TestEntity): TestEntity
+    fun update(updateId: Int, updateName: String)
 
-    fun delete(id: Int): List<TestEntity>
+    fun delete(deleteId: Int)
 }
