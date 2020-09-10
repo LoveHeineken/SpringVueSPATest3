@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import com.example.SpringVueSPATest3.entity.TestEntity
 import com.example.SpringVueSPATest3.repository.TestRepository
-import org.apache.ibatis.annotations.Param
 import org.slf4j.LoggerFactory
 
 @Service
@@ -20,15 +19,21 @@ class TestServiceImpl: TestService {
     }
 
     override fun insert(insertId: Int, insertName: String) {
-        testRepository.insert(insertId, insertName)
+        runCatching { testRepository.insert(insertId, insertName) }
+                .onFailure { it.printStackTrace() }
+                .onSuccess { println("Success") }
     }
 
     override fun update(updateId: Int, updateName: String) {
-        testRepository.update(updateId, updateName)
+        runCatching { testRepository.update(updateId, updateName) }
+                .onFailure { it.printStackTrace() }
+                .onSuccess { println("Success") }
     }
 
     override fun delete(deleteId: Int) {
-        testRepository.delete(deleteId)
+        runCatching { testRepository.delete(deleteId) }
+                .onFailure { it.printStackTrace() }
+                .onSuccess { println("Success") }
     }
 
 }
